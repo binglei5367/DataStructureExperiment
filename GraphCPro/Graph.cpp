@@ -159,3 +159,38 @@ int CGraph::FindShortPath(int nVexStart, int nVexEnd, Edge aPath[])
 
 	return 0;
 }
+
+
+int CGraph::MiniSpanTree(Edge aPath[])
+{
+	bool bVisited[MAX_VERTEX_NUM] = { false };
+	int min = INT16_MAX;
+	int k = 0;
+	bVisited[0] = true;
+	int nVex1, nVex2, n = 0;
+	for (k = 0; k < this->m_nVexNum - 1; k++)
+	{
+		min = INT16_MAX;
+		for (int i = 0; i < this->m_nVexNum; i++)
+		{
+			if (bVisited[i])
+			{
+				n++;
+				for (int j = 0; j < this->m_nVexNum; j++)
+				{
+					if ((!bVisited[j]) && (this->m_aAdjMatrix[i][j] < min) && (this->m_aAdjMatrix[j][i] < min))
+					{
+						min = this->m_aAdjMatrix[i][j];
+						nVex1 = i; nVex2 = j;
+					}
+				}
+			}
+		}
+		aPath[k].vex1 = nVex1;
+		aPath[k].vex2 = nVex2;
+		aPath[k].weight = min;
+		bVisited[nVex1] = true;
+		bVisited[nVex2] = true;
+	}
+	return k;
+}

@@ -46,5 +46,6 @@ public:
 	void DFS(int nVex, bool bVisited[], int & nIndex, PathList & pList);
 	void DFSTraverse(int nVex, PathList & pList);
 	int FindShortPath(int nVexStart, int nVexEnd, Edge aPath[]);
+	int MiniSpanTree(Edge aPath[]);
 };
 

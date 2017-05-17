@@ -101,4 +101,30 @@ void CTourism::TravelPath(void)
 
 void CTourism::FindShortPath(void)
 {
+	int nVexStart, nVexEnd;
+	Edge aPath[MAX_VERTEX_NUM];
+	printf("Input Start Vex Num: ");
+	scanf("%d", &nVexStart);
+	printf("Input End Vex Num: ");
+	scanf("%d", &nVexEnd);
+	m_Graph.FindShortPath(nVexStart, nVexEnd, aPath);
+}
+
+void CTourism::DesignPath(void)
+{
+	Edge aPath[MAX_VERTEX_NUM];
+	int k = m_Graph.MiniSpanTree(aPath);
+	printf("Set:\n");
+	int n1, n2, w, total;
+	Vex v1, v2;
+	Edge e;
+	for (int i = 0; i < k; i++)
+	{
+		e = aPath[i];
+		n1 = e.vex1;
+		n2 = e.vex2;
+		v1 = m_Graph.GetVex(n1);
+		v2 = m_Graph.GetVex(n2);
+		printf("%s-%s\n", &v1.name, &v2.name);
+	}
 }

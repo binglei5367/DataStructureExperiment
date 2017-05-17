@@ -21,5 +21,7 @@ public:
 	void TravelPath(void);
 	//
 	void FindShortPath(void);
+	//
+	void DesignPath(void);
 };
 

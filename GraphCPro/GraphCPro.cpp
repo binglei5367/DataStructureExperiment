@@ -12,7 +12,7 @@ int main()
 	CTourism m_Tourism;
 	while(bRunning)
 	{
-		cout << "==== ====" << endl;
+		cout << "====景区信息管理系统====" << endl;
 		cout << "1.创建景区景点图" << endl;
 		cout << "2.查询景点信息" << endl;
 		cout << "3.旅游景点导航" << endl;
@@ -35,8 +35,10 @@ int main()
 			if (gCreated)m_Tourism.TravelPath();
 			break;
 		case 4:
+			if (gCreated)m_Tourism.FindShortPath();
 			break;
 		case 5:
+			if (gCreated)m_Tourism.DesignPath();
 			break;
 		case 0:
 			bRunning = false;
