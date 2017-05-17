@@ -107,7 +107,18 @@ void CTourism::FindShortPath(void)
 	scanf("%d", &nVexStart);
 	printf("Input End Vex Num: ");
 	scanf("%d", &nVexEnd);
-	m_Graph.FindShortPath(nVexStart, nVexEnd, aPath);
+	int length = m_Graph.FindShortPath(nVexStart, nVexEnd, aPath);
+	Vex sVex = m_Graph.GetVex(aPath[0].vex1);
+	int nWeight = 0;
+	printf("Shortest Path: ");
+	for (int i = 0; i < length; i++)
+	{
+		sVex = m_Graph.GetVex(aPath[i].vex2);
+		printf("->%s", sVex.name);
+		nWeight += aPath[i].weight;
+	}
+	printf("\n");
+	printf("Total Weight: %d\n", nWeight);
 }
 
 void CTourism::DesignPath(void)

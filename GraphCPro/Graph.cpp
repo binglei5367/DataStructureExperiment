@@ -150,14 +150,42 @@ int CGraph::FindShortPath(int nVexStart, int nVexEnd, Edge aPath[])
 					canAdd = true;
 				}
 			}
-			if (!canAdd)break;
 		}
+		if (!canAdd)break;
 		//将点加入集合
 		aVisited[i] = true;
+		nShortPath[v][i] = v;
+		for (int w = 0; w < m_nVexNum; w++)
+		{
+			if (!aVisited[w] && (minDis + m_aAdjMatrix[v][w] < nShortDistence[w]))		//**
+			{
+				nShortDistence[w] = minDis + m_aAdjMatrix[v][w];
+				
+				for (int j = 0; j < m_nVexNum; j++)										//**
+				{	
+					//将w的路径复制给i
+					nShortPath[w][i] = nShortPath[v][i];
+				}
+			}
+		}
+	}
+
+	int nIndex = 0;
+	int nVex1 = nVexStart;
+	for (int i = 0; i < m_nVexNum; i++)
+	{
+		if (nShortPath[nVexEnd][i] != -1)
+		{
+			aPath[nIndex].vex1 = nVex1;
+			aPath[nIndex].vex2 = nShortPath[nVexEnd][i];
+			aPath[nIndex].weight = m_aAdjMatrix[aPath[nIndex].vex1][aPath[nIndex].vex2];
+			nVex1 = nShortPath[nVexEnd][i];
+			nIndex++;
+		}
 	}
 
 
-	return 0;
+	return nIndex;
 }
 
 
